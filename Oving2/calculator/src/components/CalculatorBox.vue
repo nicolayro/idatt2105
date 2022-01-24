@@ -1,15 +1,25 @@
 <template>
   <div class="calculator-container">
+    <!-- Title -->
     <div class="title-container">
       <img class="title" alt="Vue logo" src="../assets/logo.png" /> 
       <div class="title">Calculator</div>  
     </div>
+
+    <!-- Calculator -->
+    <Calculator />
+
   </div>
 </template>
 
 <script>
+import Calculator from "./Calculator.vue";
+
 export default {
   name: "CalculatorBox",
+  components: {
+    Calculator
+  }
 };
 
 </script>
@@ -21,12 +31,10 @@ img {
 }
 
 .calculator-container {
-  border: solid 2px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 80vh;
   margin: auto;
 }
 
