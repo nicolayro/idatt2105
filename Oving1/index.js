@@ -39,6 +39,12 @@ secretBtn.onclick = function () {
 // 3
 let arr = ["Det første punktet", "Et punkt til", "Det siste poenget er"];
 let container = document.querySelector('.array ul');
+
+// for-loop som looper tre ganger
+// hentet en tilfeldig tall mellom 0 og lengde på array
+// plukket ut det
+
+
 arr.map((point) => {
     container.appendChild(document.createElement("li")).textContent = point;
 })
