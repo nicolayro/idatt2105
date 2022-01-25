@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+Grid
+ */
+
+.wrapper {
+}
+
+/*
+Header
+ */
+
+#logo {
+    width: 50px;
+}
+
+header {
+}
+
+/*
+Meny
+ */
+
+nav {
+    background-color: steelblue;
+}
+
+nav ul {
+    list-style: none;
+    margin: auto;
+    padding: 10px;
+}
+
+nav ul li {
+    display: inline;
+    padding: 10px;
+}
+
+/*
+Main
+ */
+
+main {
+    margin: 1em;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.content-box {
+    width: 90%;
+    margin-inline: auto;
+}
+
+/*
+Har blitt brukt for debugging
+ */
+
+/*
+.box-1 {
+    background-color: red;
+}
+
+.box-2 {
+    background-color: orange;
+}
+
+.box-3 {
+    background-color: yellow;
+}
+
+.box-4 {
+    background-color: green;
+}
+
+.box-5 {
+    background-color: blue;
+ */
+.box-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.box-3 * {
+    margin: auto;
+}
+
+.box-4 {
+    font-family: "Montserrat", "sans-serif";
+}
+
+.box-5 {
+    display: flex;
+    justify-content: center;
+}
+
+
+/*
+Footer
+ */
+
+footer {
+    background-color: lightgrey;
+    border-top: solid 2px darkgrey;
+    padding: 2em;
+}
+
+/*
+For mobil
+ */
+
+@media (min-width: 70em) {
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .box-1 {
+        grid-column: span 2;
+    }
+}
+
+/*
+For javascript
+ */
+
+.secret h3 {
+    display: none;
+}
+
+
