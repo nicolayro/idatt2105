@@ -1,5 +1,6 @@
-package no.ntnu.calculator.model;
+package no.ntnu.calculator.util;
 
+import no.ntnu.calculator.model.Calculation;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
