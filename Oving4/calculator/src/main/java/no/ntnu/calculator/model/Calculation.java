@@ -1,5 +1,7 @@
 package no.ntnu.calculator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -15,6 +17,7 @@ public class Calculation {
     private BigDecimal b;
     private BigDecimal result;
     private String operand;
+    @JsonIgnore
     @ManyToOne
     private User user;
 
@@ -66,5 +69,10 @@ public class Calculation {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s = %s", a, operand, b, result);
     }
 }

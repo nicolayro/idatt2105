@@ -61,4 +61,12 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public Set<Calculation> getCalculations() {
+        return calculations;
+    }
+
+    public void setCalculations(Set<Calculation> calculations) {
+        this.calculations = calculations;
+    }
 }

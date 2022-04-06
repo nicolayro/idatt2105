@@ -8,7 +8,15 @@ const fetchClient = () => {
     },
   };
 
-  return axios.create(options);
+  let instance = axios.create(options);
+
+  instance.interceptors.request.use(async (config) => {
+    let token = localStorage.getItem("token");
+    config.headers.Authorization = token ? `Bearer ${token}` : "";
+    return config;
+  });
+
+  return instance;
 };
 
 export default fetchClient();

@@ -22,6 +22,12 @@ public class CalculationService {
         this.calculationRepository = calculationRepository;
     }
 
+    /**
+     * Retrieves all calculations for the current user
+     *
+     * @param user user to look for calculations for
+     * @return list of all calculations for that user
+     */
     public List<Calculation> getAllCalculations(User user) {
         return calculationRepository.findAllByUser(user);
     }

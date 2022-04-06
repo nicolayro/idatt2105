@@ -1,31 +1,52 @@
 <template>
-  <h2>Logg inn</h2>
+  <h2>Registrer deg</h2>
   <form @submit.prevent="handleSubmit">
-    <label for="email">Epost</label>
-    <input id="email" type="text" v-model="email" />
+    <label for="username">Brukernavn</label>
+    <input id="text" type="text" v-model="username" />
 
     <label for="password">Passord</label>
     <input id="password" type="password" v-model="password" />
 
-    <button type="submit">Logg inn</button>
+    <label for="repeat-password">Gjenta passord</label>
+    <input id="repeat-password" type="password" v-model="repeatPassword" />
+
+    <button type="submit">Registrer meg</button>
+    <p class="error" v-if="error">{{ error }}</p>
   </form>
+
+  <p>
+    Har du ingen konto ?
+    <router-link to="/register">Registrer deg her</router-link>
+  </p>
 </template>
 
 <script>
+import { register } from "@/service/authUtil";
+
 export default {
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
+      repeatPassword: "",
+      error: "",
     };
   },
   methods: {
-    handleSubmit() {
-      console.log("Logging in...");
-      console.log({
-        email: this.email,
-        password: this.password,
-      });
+    async handleSubmit() {
+      if (this.password !== this.repeatPassword) {
+        this.error = "Passordene er ikke like";
+      }
+      console.log("Attempting registration");
+      try {
+        const response = await register({
+          username: this.username,
+          password: this.password,
+        });
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

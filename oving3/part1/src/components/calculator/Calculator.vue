@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { calculate } from "../../service/apiUtil";
+import { calculate, getCalculations } from "../../service/apiUtil";
 
 export default {
   name: "Calculator",
@@ -71,7 +71,7 @@ export default {
 
         const response = await calculate(calculation);
         console.log(response.data);
-        return response.data;
+        return response.data.result;
       } catch (err) {
         console.log(err);
         return null;
@@ -164,6 +164,21 @@ export default {
         this.input = this.input.toString();
       }
     },
+  },
+  beforeMount() {
+    const fetchHistory = async () => {
+      try {
+        const response = await getCalculations();
+        response.data.forEach((calculation) =>
+          this.history.push(
+            `${calculation.a} ${calculation.operand} ${calculation.b} = ${calculation.result}`
+          )
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchHistory();
   },
 };
 </script>
