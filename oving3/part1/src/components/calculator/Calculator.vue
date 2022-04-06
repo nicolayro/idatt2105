@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { calculate } from "../../service/apiUtil";
+
 export default {
   name: "Calculator",
   data() {
@@ -58,6 +60,23 @@ export default {
     };
   },
   methods: {
+    async handleCalculation() {
+      try {
+        const calculation = {
+          a: this.ongoing,
+          b: this.input,
+          operand: this.operator,
+        };
+        console.log(calculation);
+
+        const response = await calculate(calculation);
+        console.log(response.data);
+        return response.data;
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
+    },
     handleInput(number) {
       if (number === ".") {
         if (!this.input.includes(".")) {
@@ -68,7 +87,6 @@ export default {
       else if (this.input.length >= 8) {
         return;
       } else if (this.isAnswer) {
-        console.log("hey");
         this.ongoing = this.input;
         this.operator = "";
         this.input = number.toString();
@@ -79,27 +97,29 @@ export default {
         this.input += number;
       }
     },
-    handleOperator(operator) {
+    async handleOperator(operator) {
       if (this.operator !== "") {
         var answer = "";
-        switch (this.operator) {
-          case "+":
-            answer = Number(this.input) + Number(this.ongoing);
-            break;
-          case "-":
-            answer = Number(this.input) - Number(this.ongoing);
-            break;
-          case "x":
-            answer = Number(this.input) * Number(this.ongoing);
-            break;
-          case "/":
-            if (this.input == 0) {
-              answer = "error";
-            } else {
-              answer = Number(this.input) / Number(this.ongoing);
-            }
-            break;
-        }
+        const data = await this.handleCalculation();
+        answer = data;
+        // switch (this.operator) {
+        //   case "+":
+        //     answer = Number(this.input) + Number(this.ongoing);
+        //     break;
+        //   case "-":
+        //     answer = Number(this.input) - Number(this.ongoing);
+        //     break;
+        //   case "x":
+        //     answer = Number(this.input) * Number(this.ongoing);
+        //     break;
+        //   case "/":
+        //     if (this.input == 0) {
+        //       answer = "error";
+        //     } else {
+        //       answer = Number(this.input) / Number(this.ongoing);
+        //     }
+        //     break;
+        // }
         let formattedAnswer = answer;
         // Behandler tallet
         if (answer.toString().length > 8) {
