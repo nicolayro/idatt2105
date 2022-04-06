@@ -5,14 +5,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class User implements UserDetails {
-
     @Id
     private String username;
     private String password;
+    @OneToMany
+    private Set<Calculation> calculations;
 
     public User(){}
 

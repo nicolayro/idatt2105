@@ -1,9 +1,6 @@
 package no.ntnu.calculator.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -16,7 +13,10 @@ public class Calculation {
     private Long id;
     private BigDecimal a;
     private BigDecimal b;
+    private BigDecimal result;
     private String operand;
+    @ManyToOne
+    private User user;
 
     public Calculation() {}
 
@@ -52,4 +52,19 @@ public class Calculation {
         return operand;
     }
 
+    public BigDecimal getResult() {
+        return result;
+    }
+
+    public void setResult(BigDecimal result) {
+        this.result = result;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
