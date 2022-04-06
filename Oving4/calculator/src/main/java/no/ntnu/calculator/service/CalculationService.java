@@ -39,6 +39,9 @@ public class CalculationService {
      */
     public Calculation handleCalculation(Calculation calculation, User user) {
         calculation.setResult(calculator.calculate(calculation));
+        if(calculation.getResult() == null) {
+            return null;
+        }
         calculation.setUser(user);
         return calculationRepository.save(calculation);
     }

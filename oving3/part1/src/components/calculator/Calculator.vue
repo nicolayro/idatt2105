@@ -101,7 +101,11 @@ export default {
       if (this.operator !== "") {
         var answer = "";
         const data = await this.handleCalculation();
-        answer = data;
+        if (!data) {
+          answer = "error";
+        } else {
+          answer = data;
+        }
         // switch (this.operator) {
         //   case "+":
         //     answer = Number(this.input) + Number(this.ongoing);
@@ -127,9 +131,17 @@ export default {
         }
 
         //Logger regnestykket
-        this.history.push(
-          this.ongoing + " " + this.operator + " " + this.input + " = " + answer
-        );
+        if (answer !== "error") {
+          this.history.push(
+            this.ongoing +
+              " " +
+              this.operator +
+              " " +
+              this.input +
+              " = " +
+              answer
+          );
+        }
 
         if (operator === "=") {
           this.ongoing =

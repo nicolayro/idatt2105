@@ -6,9 +6,9 @@
 
     <label for="password">Passord</label>
     <input id="password" type="password" v-model="password" />
-    <div>{{ token }}</div>
 
     <button type="submit">Logg inn</button>
+    <p class="error" v-if="error">{{ error }}</p>
   </form>
 
   <p>
@@ -19,6 +19,7 @@
 
 <script>
 import { login } from "@/service/authUtil";
+import router from "@/router";
 
 export default {
   data() {
@@ -26,6 +27,7 @@ export default {
       username: "",
       password: "",
       token: localStorage.getItem("token"),
+      error: "",
     };
   },
   methods: {
@@ -37,8 +39,12 @@ export default {
           password: this.password,
         });
         localStorage.setItem("token", response.data);
+        router.push("/");
       } catch (err) {
         console.log(err);
+        if (err.response.status === 401) {
+          this.error = "Ugyldig brukernavn eller passord";
+        }
       }
     },
   },

@@ -47,16 +47,20 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         logger.info("Attempting do login {}...", loginRequest.getUsername());
-        Authentication authentication =
-                authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                loginRequest.getUsername(),
-                                loginRequest.getPassword()
-                        )
-                );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtil.generateToken(loginRequest.getUsername());
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        try {
+            Authentication authentication =
+                    authenticationManager.authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    loginRequest.getUsername(),
+                                    loginRequest.getPassword()
+                            )
+                    );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String token = jwtUtil.generateToken(loginRequest.getUsername());
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
     }
-
 }

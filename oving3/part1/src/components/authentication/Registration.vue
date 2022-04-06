@@ -36,6 +36,7 @@ export default {
     async handleSubmit() {
       if (this.password !== this.repeatPassword) {
         this.error = "Passordene er ikke like";
+        return;
       }
       console.log("Attempting registration");
       try {
